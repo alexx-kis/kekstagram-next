@@ -1,0 +1,21 @@
+@use '@/styles/abstracts' as *;
+
+/* // ======================== filter-button ======================== // */
+
+.filter-button {
+  font-size: const(18px);
+  text-transform: uppercase;
+  background-color: transparent;
+  font-weight: 700;
+  padding-inline: const(15px);
+  padding-block: const(5px);
+  color: #fff;
+  border-radius: const(2px);
+  line-height: 1.1;
+  transition: all 250ms;
+
+  &._active {
+    color: $red;
+    background-color: #fff;
+  }
+}

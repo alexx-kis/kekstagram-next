@@ -1,7 +1,13 @@
+import { basePath } from '@/constants/const';
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export',
+  basePath: basePath,
+  reactStrictMode: true,
+  images: {
+    unoptimized: true
+  }
 };
 
 export default nextConfig;

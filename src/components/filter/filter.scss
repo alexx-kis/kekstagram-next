@@ -1,0 +1,17 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== filter ========================^ // ^*/
+
+.filter {
+  &__list {
+    display: flex;
+    gap: const(4px);
+    padding-block: const(20px);
+  }
+
+  &__item {}
+
+  &__button {
+    
+  }
+}
