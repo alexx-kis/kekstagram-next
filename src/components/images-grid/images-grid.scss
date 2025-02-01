@@ -7,7 +7,34 @@
   grid-template-columns: repeat(7, 1fr);
   gap: const(10px);
 
+  @media (max-width: $LAPTOP) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (max-width: $MOBILE) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   &__item {
     cursor: pointer;
+    width: 100%;
+
+    img {
+      @include square(100%);
+    }
+  }
+
+  &__upload-form {
+    aspect-ratio: 1;
+    grid-row: 1 / 4;
+    grid-column: 3 / 6;
+
+    @media (max-width: $LAPTOP) {
+      grid-column: 2 / 5;
+    }
+
+    @media (max-width: $MOBILE) {
+      grid-column: 1 / 4;
+    }
   }
 }
