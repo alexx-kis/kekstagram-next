@@ -9,13 +9,14 @@ function PhotosGrid(): React.JSX.Element {
   return (
     <ul className='photos-grid'>
       {DATA.map(({ id, url, description, likes, comments }) => (
-        <Photo
-          key={id}
-          url={url}
-          description={description}
-          likes={likes}
-          comments={comments}
-        />
+        <li key={id} className='photos-grid__item'>
+          <Photo
+            url={url}
+            description={description}
+            likes={likes}
+            comments={comments}
+          />
+        </li>
       ))}
       <li className='photos-grid__upload-form'>
         <UploadForm />

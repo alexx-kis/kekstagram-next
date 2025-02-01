@@ -15,9 +15,7 @@ type PhotoProps = {
 function Photo(photoProps: PhotoProps): React.JSX.Element {
   const { url, description, comments, likes } = photoProps;
   return (
-    <li
-      className='photos-grid__item photo'
-    >
+    <div className='photo'>
       <Image
         className='photo__image'
         src={url}
@@ -51,7 +49,7 @@ function Photo(photoProps: PhotoProps): React.JSX.Element {
           </p>
         </div>
       </div>
-    </li>
+    </div>
   );
 }
 export default Photo;
