@@ -1,0 +1,13 @@
+@use '@/styles/abstracts' as *;
+
+/*$ // $======================== images-grid ========================$ // $*/
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: const(10px);
+
+  &__item {
+    cursor: pointer;
+  }
+}
