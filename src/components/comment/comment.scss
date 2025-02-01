@@ -1,0 +1,14 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== comment ========================^ // ^*/
+
+.comment {
+  display: flex;
+  gap: const(15px);
+
+  &__user-avatar {
+    width: const(35px);
+    height: auto;
+    flex-shrink: 0;
+  }
+}

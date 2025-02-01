@@ -1,0 +1,19 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== overlay ========================^ // ^*/
+
+.overlay {
+  background-color: #000000cc;
+  position: fixed;
+  inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  z-index: $overlayZIndex;
+  transition: all 250ms;
+  cursor: pointer;
+
+  &._visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}

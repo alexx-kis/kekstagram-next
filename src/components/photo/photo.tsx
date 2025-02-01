@@ -1,4 +1,8 @@
+'use client';
+
 import { basePath } from '@/constants/const';
+import { useAppDispatch } from '@/hooks';
+import { openModalAction, setCurrentPhotoIdAction } from '@/store/actions';
 import { CommentType } from '@/types';
 import Image from 'next/image';
 import './photo.scss';
@@ -6,6 +10,7 @@ import './photo.scss';
 // ^======================== Photo ========================^ //
 
 type PhotoProps = {
+  id: number;
   url: string;
   description: string;
   comments: CommentType[];
@@ -13,9 +18,20 @@ type PhotoProps = {
 };
 
 function Photo(photoProps: PhotoProps): React.JSX.Element {
-  const { url, description, comments, likes } = photoProps;
+  const { id, url, description, comments, likes } = photoProps;
+
+  const dispatch = useAppDispatch();
+
+  const handlePhotoClick = () => {
+    dispatch(openModalAction());
+    dispatch(setCurrentPhotoIdAction(String(id)));
+  };
+
   return (
-    <div className='photo'>
+    <div
+      className='photo'
+      onClick={handlePhotoClick}
+    >
       <Image
         className='photo__image'
         src={url}

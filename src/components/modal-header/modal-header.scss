@@ -1,0 +1,27 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^ ======================== modal-header ========================^ // ^ */
+
+.modal-header {
+  padding: const(15px);
+  display: flex;
+  gap: const(15px);
+  border-bottom: const(1px) solid $lightGray;
+  font-size: const(14px);
+
+  &__user-avatar {
+    @include square(const(35px));
+  }
+
+  &__description {
+    max-width: const(360px);
+  }
+
+  &__likes {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: const(8px);
+  }
+
+}

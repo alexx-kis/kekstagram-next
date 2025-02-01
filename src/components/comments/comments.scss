@@ -1,0 +1,22 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== comments ========================^ // ^*/
+
+.comments {
+  padding-block: const(20px);
+  font-size: const(14px);
+  padding-inline: const(15px);
+
+  &__amount {
+    margin-left: const(65px);
+    display: flex;
+    gap: const(8px);
+    margin-bottom: const(20px);
+  }
+
+  &__amount-actual {}
+
+  &__amount-total {}
+
+  &__list {}
+}

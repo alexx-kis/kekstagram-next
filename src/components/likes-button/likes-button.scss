@@ -1,0 +1,15 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== likes-button ========================^ // ^*/
+
+.likes-button {
+  display: flex;
+  align-items: center;
+  gap: const(10px);
+
+  &__icon {
+    flex-shrink: 0;
+    width: const(20px);
+    height: const(18px);
+  }
+}

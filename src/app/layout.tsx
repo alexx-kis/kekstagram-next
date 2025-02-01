@@ -1,3 +1,5 @@
+import Overlay from '@/components/overlay/overlay';
+import Providers from '@/providers/providers';
 import '@/styles/index.scss';
 import type { Metadata } from "next";
 
@@ -16,11 +18,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className='wrapper'>
-          <main>
-            {children}
-          </main>
-        </div>
+        <Providers>
+          <div className='wrapper'>
+            <Overlay />
+            <main>
+              {children}
+            </main>
+          </div>
+        </Providers>
       </body>
     </html>
   );

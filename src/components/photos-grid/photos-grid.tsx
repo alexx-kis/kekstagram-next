@@ -11,6 +11,7 @@ function PhotosGrid(): React.JSX.Element {
       {DATA.map(({ id, url, description, likes, comments }) => (
         <li key={id} className='photos-grid__item'>
           <Photo
+            id={id}
             url={url}
             description={description}
             likes={likes}
