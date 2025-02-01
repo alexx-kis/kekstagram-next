@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33.3 33.3">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #8d8d8d;
+      }
+
+      .cls-10, .cls-11, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        opacity: 0.9;
+      }
+
+      .cls-4 {
+        opacity: 0.8;
+      }
+
+      .cls-5 {
+        opacity: 0.7;
+      }
+
+      .cls-6 {
+        opacity: 0.6;
+      }
+
+      .cls-7 {
+        opacity: 0.5;
+      }
+
+      .cls-8 {
+        opacity: 0.4;
+      }
+
+      .cls-9 {
+        opacity: 0.3;
+      }
+
+      .cls-10 {
+        opacity: 0.2;
+      }
+
+      .cls-11 {
+        opacity: 0.1;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <rect class="cls-1" width="33.3" height="33.25" rx="2.6"/>
+    <rect class="cls-2" x="15.6" y="5.7" width="2" height="6"/>
+    <rect class="cls-2" x="12" y="7.2" width="2" height="6" transform="translate(-3.7 7.5) rotate(-30)"/>
+    <rect class="cls-3" x="9.2" y="10.1" width="2" height="6" transform="translate(-6.6 14.9) rotate(-60)"/>
+    <rect class="cls-4" x="8.1" y="14" width="2" height="6" transform="translate(-8.3 25.7) rotate(-90)"/>
+    <rect class="cls-5" x="9.2" y="17.9" width="2" height="6" transform="translate(-3.3 39.8) rotate(-120)"/>
+    <rect class="cls-6" x="12" y="20.8" width="2" height="6" transform="translate(12 50.6) rotate(-150)"/>
+    <rect class="cls-7" x="16" y="21.9" width="2" height="6" transform="translate(33.6 49.4) rotate(-180)"/>
+    <rect class="cls-8" x="19.9" y="20.8" width="2" height="6" transform="translate(50.6 33.6) rotate(150)"/>
+    <rect class="cls-9" x="22.8" y="17.9" width="2" height="6" transform="translate(53.5 10.4) rotate(120)"/>
+    <rect class="cls-10" x="23.9" y="14" width="2" height="6" transform="translate(41.5 -8.3) rotate(90)"/>
+    <rect class="cls-11" x="22.8" y="10.1" width="2" height="6" transform="translate(22.8 -14.5) rotate(60)"/>
+    <path class="cls-2" d="M17,17" transform="translate(-0.4 -0.4)"/>
+  </g>
+</svg>
