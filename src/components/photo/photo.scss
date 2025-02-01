@@ -1,0 +1,67 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== photo ========================^ // ^*/
+
+.photo {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+
+  @media (hover:hover) {
+    &:hover {
+      .photo__info {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__image {
+    @include square(100%);
+  }
+
+  &__info {
+    display: flex;
+    gap: const(8px);
+    height: const(30px);
+    padding-inline: desk(15px, 15px);
+    position: absolute;
+    left: 50%;
+    bottom: const(10px);
+    border-radius: const(5px);
+    background-color: $black50;
+    color: #fff;
+    font-size: const(14px);
+    translate: -50%;
+    opacity: 0;
+    transition: opacity 250ms;
+
+    @media (max-width: $MOBILE) {
+      height: mob(30px, 20px);
+      padding-inline: mob(15px, 10px);
+      bottom: mob(10px, 4px);
+      font-size: mob(14px, 10px);
+    }
+  }
+
+  &__comments,
+  &__likes {
+    display: flex;
+    align-items: center;
+    gap: desk(5px, 5px);
+
+    @media (max-width: $MOBILE) {
+      gap: mob(5px, 2px);
+    }
+  }
+
+  &__comments-icon,
+  &__likes-icon {
+    width: const(20px);
+    height: const(16px);
+
+    @media (max-width: $MOBILE) {
+      width: mob(20px, 12px);
+      height: mob(16px, 10px);
+    }
+  }
+}

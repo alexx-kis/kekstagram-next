@@ -1,8 +1,8 @@
 @use '@/styles/abstracts' as *;
 
-/*$ // $======================== images-grid ========================$ // $*/
+/*$ // $======================== photos-grid ========================$ // $*/
 
-.images-grid {
+.photos-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: const(10px);
@@ -13,16 +13,10 @@
 
   @media (max-width: $MOBILE) {
     grid-template-columns: repeat(3, 1fr);
+    gap: mob(10px, 5px);
   }
 
-  &__item {
-    cursor: pointer;
-    width: 100%;
-
-    img {
-      @include square(100%);
-    }
-  }
+  &__item {}
 
   &__upload-form {
     aspect-ratio: 1;
