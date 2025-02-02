@@ -1,4 +1,4 @@
-import { basePath } from '@/constants/const';
+import { basePath, FilterEffect } from '@/constants/const';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { closeModalAction } from '@/store/actions';
 import { getIsUploadModalOpen } from '@/store/selectors';
@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import CloseModalButton from '../close-modal-button/close-modal-button';
+import Effect from '../effect/effect';
 import Scale from '../scale/scale';
 import './upload-modal.scss';
 
@@ -54,7 +55,14 @@ function UploadModal(): React.JSX.Element {
             width={600}
             height={600}
           />
-          <Scale bemClass='upload-modal__scale'/>
+          <Scale bemClass='upload-modal__scale' />
+          <div className='effects'>
+            <ul className='effects__list'>
+              {Object.values(FilterEffect).map((item) => (
+                <Effect key={item} name={item} />
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </dialog>

@@ -25,3 +25,12 @@ export enum DataStatus {
   Loaded = 'Loaded',
   Error = 'Error',
 }
+
+export enum FilterEffect {
+  Default = 'default',
+  Chrome = 'chrome',
+  Sepia = 'sepia',
+  Marvin = 'marvin',
+  Phobos = 'phobos',
+  Heat = 'heat'
+}
