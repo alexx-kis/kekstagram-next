@@ -1,0 +1,25 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== preloader ========================^ // ^*/
+
+.preloader {
+  color: #fff;
+  font-size: desk(100px, 80px);
+
+  @media (max-width: $TABLET) {
+    font-size: tab(80px, 40px);
+  }
+
+  @media (max-width: $MOBILE) {
+    font-size: mob(40px, 30px);
+  }
+
+  &__wrapper {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    inset: 0;
+    background-color: #00000033;
+    backdrop-filter: blur(const(20px));
+  }
+}

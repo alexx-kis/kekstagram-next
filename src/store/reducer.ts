@@ -1,9 +1,9 @@
-import { FilterOption } from '@/constants/const';
-import { DATA } from '@/mock/data';
+import { DataStatus, FilterOption } from '@/constants/const';
 import { PhotoType } from '@/types';
 import { getPhotoById, sortPhotos } from '@/utils/common-utils';
 import { createReducer } from '@reduxjs/toolkit';
 import { changeFilterOptionAction, closeModalAction, openModalAction } from './actions';
+import { fetchPhotos } from './api-actions';
 
 // %======================== reducer ========================% //
 type InitialState = {
@@ -12,14 +12,16 @@ type InitialState = {
   currentPhoto: PhotoType | undefined,
   filterOption: FilterOption,
   sortedPhotos: PhotoType[];
+  dataStatus: DataStatus;
 };
 
 const initialState: InitialState = {
-  data: DATA,
+  data: [],
   isModalOpen: false,
   currentPhoto: undefined,
   filterOption: FilterOption.Default,
-  sortedPhotos: DATA,
+  sortedPhotos: [],
+  dataStatus: DataStatus.Loading
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -34,6 +36,16 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(changeFilterOptionAction, (state, action) => {
       state.filterOption = action.payload;
       state.sortedPhotos = sortPhotos(state.data, action.payload);
+    })
+    .addCase(fetchPhotos.pending, (state) => {
+      state.dataStatus = DataStatus.Loading;
+    })
+    .addCase(fetchPhotos.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.Loaded;
+      state.data = action.payload;
+      state.sortedPhotos = action.payload;
+    })
+    .addCase(fetchPhotos.rejected, (state) => {
+      state.dataStatus = DataStatus.Error;
     });
-
 });

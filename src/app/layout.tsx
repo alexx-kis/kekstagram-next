@@ -1,3 +1,4 @@
+import ClientFetcher from '@/components/client-fetcher/client-fetcher';
 import Overlay from '@/components/overlay/overlay';
 import Providers from '@/providers/providers';
 import '@/styles/index.scss';
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
+          <ClientFetcher />
           <div className='wrapper'>
             <Overlay />
             <main>
