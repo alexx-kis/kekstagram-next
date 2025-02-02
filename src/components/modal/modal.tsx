@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import Comments from '../comments/comments';
 import ModalHeader from '../modal-header/modal-header';
 import './modal.scss';
+import CommentForm from '../comment-form/comment-form';
 
 // ^======================== Modal ========================^ //
 
@@ -71,6 +72,7 @@ function Modal(): React.JSX.Element {
             <ModalHeader bemClass='modal__header' />
             <Comments />
           </div>}
+        <CommentForm bemClass='comments__form' />
       </div>
     </dialog>
   );

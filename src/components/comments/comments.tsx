@@ -2,7 +2,6 @@ import { basePath, SHOWN_COMMENTS_STEP } from '@/constants/const';
 import { useAppSelector } from '@/hooks';
 import { getCurrentPhoto, getIsModalOpen } from '@/store/selectors';
 import { useEffect, useState } from 'react';
-import CommentForm from '../comment-form/comment-form';
 import Comment from '../comment/comment';
 import LoadMoreButton from '../load-more-button/load-more-button';
 import './comments.scss';
@@ -61,7 +60,6 @@ function Comments(): React.JSX.Element {
         totalCommentsAmount! > shownCommentsAmount! &&
         <LoadMoreButton onLoadMoreButtonClick={handleLoadMoreButtonClick} />
       }
-      <CommentForm bemClass='comments__form' />
     </div>
   );
 }

@@ -5,6 +5,10 @@
 .comment-form {
   display: flex;
   gap: const(15px);
+  padding-inline: const(20px);
+  padding-bottom: const(20px);
+  padding-top: const(20px);
+  border-top: const(1px) solid $lightGray;
 
   &__user-avatar {}
 
