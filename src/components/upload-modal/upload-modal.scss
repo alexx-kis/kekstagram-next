@@ -1,0 +1,19 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== upload-modal ========================^ // ^*/
+
+.upload-modal {
+  visibility: visible;
+  opacity: 1;
+
+  &__image-box {
+    border: const(6px) solid #fff;
+  }
+
+  &__scale {
+    position: absolute;
+    left: 50%;
+    translate: -50%;
+    top: const(10px);
+  }
+}

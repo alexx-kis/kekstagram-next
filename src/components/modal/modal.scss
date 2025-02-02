@@ -30,23 +30,7 @@
   }
 
   &__close-button {
-    width: const(42px);
-    aspect-ratio: 1;
-    position: absolute;
-    right: 0;
-    opacity: 0.6;
-    background-color: #ffffff33;
-    transition: opacity 250ms;
-
-    @media (max-width: $MOBILE) {
-      top: 0;
-    }
-
-    @media (hover:hover) {
-      &:hover {
-        opacity: 1;
-      }
-    }
+   
   }
 
   &__inner {

@@ -1,8 +1,8 @@
 @use '@/styles/abstracts' as *;
 
-/*^ // ^======================== filter ========================^ // ^*/
+/*^ // ^======================== sorting ========================^ // ^*/
 
-.filter {
+.sorting {
   &__list {
     display: flex;
     gap: const(4px);
@@ -12,7 +12,5 @@
 
   &__item {}
 
-  &__button {
-    
-  }
+  &__button {}
 }

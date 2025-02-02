@@ -1,10 +1,11 @@
 'use client';
 
 import ErrorScreen from '@/components/error-screen/error-screen';
-import Filter from '@/components/filter/filter';
 import Modal from '@/components/modal/modal';
 import PhotosGrid from '@/components/photos-grid/photos-grid';
 import Preloader from '@/components/preloader/preloader';
+import Sorting from '@/components/sorting/sorting';
+import UploadModal from '@/components/upload-modal/upload-modal';
 import { DataStatus } from '@/constants/const';
 import { useAppSelector } from '@/hooks';
 import { getDataStatus } from '@/store/selectors';
@@ -21,9 +22,10 @@ export default function Home() {
   }
   return (
     <div className='container'>
-      <Filter />
+      <Sorting />
       <PhotosGrid />
       <Modal />
+      <UploadModal />
     </div>
   );
 }

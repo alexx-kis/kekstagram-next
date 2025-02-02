@@ -2,7 +2,7 @@ export const basePath = process.env.NODE_ENV === 'production'
   ? '/kekstagram-next'
   : '';
 
-export enum FilterOption {
+export enum SortingOption {
   Default = 'Default',
   Random = 'Random',
   Featured = 'Featured'

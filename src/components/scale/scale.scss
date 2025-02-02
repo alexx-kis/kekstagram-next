@@ -1,0 +1,35 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== scale ========================^ // ^*/
+
+.scale {
+  height: const(35px);
+  
+  &__button {
+    width: const(35px);
+    aspect-ratio: 1;
+    background-color: #00000099;
+    color: #fff;
+    font-size: const(16px);
+
+    &._decrease {
+      border-right: const(2px) solid #ffffff80;
+      border-radius: 50% 0 0 50%;
+    }
+
+    &._increase {
+      border-left: const(2px) solid #ffffff80;
+      border-radius: 0 50% 50% 0;
+    }
+  }
+
+  &__input {
+    display: inline-block;
+    width: const(60px);
+    height: 100%;
+    background-color: #00000099;
+    color: #fff;
+    font-size: const(16px);
+    text-align: center;
+  }
+}

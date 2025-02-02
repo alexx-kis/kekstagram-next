@@ -8,10 +8,11 @@ import { isEscKey } from '@/utils/common-utils';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useEffect } from 'react';
+import CloseModalButton from '../close-modal-button/close-modal-button';
+import CommentForm from '../comment-form/comment-form';
 import Comments from '../comments/comments';
 import ModalHeader from '../modal-header/modal-header';
 import './modal.scss';
-import CommentForm from '../comment-form/comment-form';
 
 // ^======================== Modal ========================^ //
 
@@ -47,21 +48,10 @@ function Modal(): React.JSX.Element {
         { '_open': isModalOpen }
       )}
     >
-      <button
-        type='button'
-        className='modal__close-button'
-        onClick={handleCloseButtonClick}
-      >
-        <Image
-          src={`${basePath}/img/icons/icon-cross.svg`}
-          alt=''
-          width={21}
-          height={21}
-        />
-      </button>
+      <CloseModalButton onCloseModalButtonClick={handleCloseButtonClick} />
       <div className='modal__inner'>
         {currentPhoto && isModalOpen &&
-          <div className='modal__image-box'>
+          <> <div className='modal__image-box'>
             <Image
               className='modal__image'
               src={`${basePath}/img/${currentPhoto.url}`}
@@ -69,9 +59,11 @@ function Modal(): React.JSX.Element {
               width={600}
               height={600}
             />
+          </div>
             <ModalHeader bemClass='modal__header' />
             <Comments />
-          </div>}
+          </>
+        }
         <CommentForm bemClass='comments__form' />
       </div>
     </dialog>
