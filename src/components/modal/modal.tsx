@@ -52,7 +52,7 @@ function Modal(): React.JSX.Element {
         onClick={handleCloseButtonClick}
       >
         <Image
-          src={`${basePath}img//icons/icon-cross.svg`}
+          src={`${basePath}img/icons/icon-cross.svg`}
           alt=''
           width={21}
           height={21}
@@ -63,7 +63,7 @@ function Modal(): React.JSX.Element {
           <div className='modal__image-box'>
             <Image
               className='modal__image'
-              src={currentPhoto.url}
+              src={`${basePath}/img/${currentPhoto.url}`}
               alt=''
               width={600}
               height={600}

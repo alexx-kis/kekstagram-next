@@ -1,4 +1,4 @@
-import { SHOWN_COMMENTS_STEP } from '@/constants/const';
+import { basePath, SHOWN_COMMENTS_STEP } from '@/constants/const';
 import { useAppSelector } from '@/hooks';
 import { getCurrentPhoto, getIsModalOpen } from '@/store/selectors';
 import { useEffect, useState } from 'react';
@@ -51,7 +51,7 @@ function Comments(): React.JSX.Element {
               key={comment.id}
               bemClass='comments__list-item'
               commentText={comment.message}
-              commentUserAvatar={comment.avatar}
+              commentUserAvatar={`${basePath}/${comment.avatar}`}
             />
           )
         }

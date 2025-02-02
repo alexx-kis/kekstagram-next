@@ -20,7 +20,7 @@ function ModalHeader(modalHeaderProps: ModalHeaderProps): React.JSX.Element {
     <div className={`${bemClass} modal-header`}>
       <Image
         className='modal-header__user-avatar'
-        src={`${basePath}/img/icons/avatar-1.svg`}
+        src={`${basePath}/img/avatar-1.svg`}
         alt=''
         width={35}
         height={35}
