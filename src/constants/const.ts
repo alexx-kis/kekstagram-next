@@ -9,3 +9,5 @@ export enum FilterOption {
 }
 
 export const SHOWN_COMMENTS_STEP = 5;
+
+export const RANDOM_PHOTOS_AMOUNT = 10;

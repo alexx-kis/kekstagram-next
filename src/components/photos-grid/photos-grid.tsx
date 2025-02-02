@@ -1,4 +1,7 @@
-import { DATA } from '@/mock/data';
+'use client';
+
+import { useAppSelector } from '@/hooks';
+import { getSortedPhotos } from '@/store/selectors';
 import Photo from '../photo/photo';
 import UploadForm from '../upload-form/upload-form';
 import './photos-grid.scss';
@@ -6,9 +9,11 @@ import './photos-grid.scss';
 // $======================== PhotosGrid ========================$ //
 
 function PhotosGrid(): React.JSX.Element {
+  const sortedPhotos = useAppSelector(getSortedPhotos);
+
   return (
     <ul className='photos-grid'>
-      {DATA.map(({ id, url, description, likes, comments }) => (
+      {sortedPhotos.map(({ id, url, description, likes, comments }) => (
         <li key={id} className='photos-grid__item'>
           <Photo
             id={id}
