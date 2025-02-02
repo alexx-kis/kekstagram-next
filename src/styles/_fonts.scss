@@ -1,13 +1,23 @@
 /** // *======================== fonts ========================* // **/
 
 @font-face {
-  font-family: OpenSans;
-  src: url('../../public/fonts/OpenSans-Regular.woff') format('woff');
-  src: url('../../public/fonts/OpenSans-Regular.woff2') format('woff2');
+  font-family: 'OpenSans';
+  src:
+    url('../../public/fonts/OpenSans-Bold.otf') format('otf'),
+    url('../../public/fonts/OpenSans-Bold.woff') format('woff'),
+    url('../../public/fonts/OpenSans-Bold.woff2') format('woff2'),
+    url('../../public/fonts/OpenSans-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700;
 }
 
 @font-face {
-  font-family: 'OpenSansCondensed';
-  src: url('../../public/fonts/OpenSansCondensed-Bold.woff') format('woff');
-  src: url('../../public/fonts/OpenSansCondensed-Bold.woff2') format('woff2');
+  font-family: 'OpenSans';
+  src:
+    url('../../public/fonts/OpenSans-Regular.otf') format('otf'),
+    url('../../public/fonts/OpenSans-Regular.woff') format('woff'),
+    url('../../public/fonts/OpenSans-Regular.woff2') format('woff2'),
+    url('../../public/fonts/OpenSans-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
 }

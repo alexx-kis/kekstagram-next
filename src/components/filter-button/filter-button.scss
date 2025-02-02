@@ -13,6 +13,7 @@
   border-radius: const(2px);
   line-height: 1.1;
   transition: all 250ms;
+  font-family: OpenSans;
 
   &._active {
     color: $red;
