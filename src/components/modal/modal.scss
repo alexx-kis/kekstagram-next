@@ -24,6 +24,11 @@
     opacity: 1;
   }
 
+  @media (max-width: $MOBILE) {
+    padding-inline: 0;
+    padding-top: 50px;
+  }
+
   &__close-button {
     width: const(42px);
     aspect-ratio: 1;
@@ -32,6 +37,10 @@
     opacity: 0.6;
     background-color: #ffffff33;
     transition: opacity 250ms;
+
+    @media (max-width: $MOBILE) {
+      top: 0;
+    }
 
     @media (hover:hover) {
       &:hover {
