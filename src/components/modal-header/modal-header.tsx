@@ -1,4 +1,6 @@
 import { basePath } from '@/constants/const';
+import { useAppSelector } from '@/hooks';
+import { getCurrentPhoto } from '@/store/selectors';
 import Image from 'next/image';
 import LikesButton from '../likes-button/likes-button';
 import './modal-header.scss';
@@ -12,6 +14,7 @@ type ModalHeaderProps = {
 function ModalHeader(modalHeaderProps: ModalHeaderProps): React.JSX.Element {
 
   const { bemClass } = modalHeaderProps;
+  const photo = useAppSelector(getCurrentPhoto);
 
   return (
     <div className={`${bemClass} modal-header`}>
@@ -23,7 +26,7 @@ function ModalHeader(modalHeaderProps: ModalHeaderProps): React.JSX.Element {
         height={35}
       />
       <p className='modal-header__description'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, omnis.
+        {photo?.description}
       </p>
       <div className='modal-header__likes'>
         <p className='modal-header__likes-text'>

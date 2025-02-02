@@ -7,3 +7,5 @@ export enum FilterOption {
   Random = 'Random',
   Featured = 'Featured'
 }
+
+export const SHOWN_COMMENTS_STEP = 5;

@@ -3,7 +3,7 @@
 import { basePath } from '@/constants/const';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { closeModalAction } from '@/store/actions';
-import { getCurrentPhotoId, getIsModalOpen } from '@/store/selectors';
+import { getCurrentPhoto, getIsModalOpen } from '@/store/selectors';
 import { isEscKey } from '@/utils/common-utils';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -18,7 +18,7 @@ function Modal(): React.JSX.Element {
 
   const dispatch = useAppDispatch();
   const isModalOpen = useAppSelector(getIsModalOpen);
-  const currentPhotoId = useAppSelector(getCurrentPhotoId);
+  const currentPhoto = useAppSelector(getCurrentPhoto);
 
   const handleCloseButtonClick = () => {
     dispatch(closeModalAction());
@@ -36,8 +36,8 @@ function Modal(): React.JSX.Element {
     return () => {
       document.removeEventListener('keydown', onEscKeydown);
     };
-
   });
+
 
   return (
     <dialog
@@ -59,17 +59,18 @@ function Modal(): React.JSX.Element {
         />
       </button>
       <div className='modal__inner'>
-        <div className='modal__image-box'>
-          <Image
-            className='modal__image'
-            src={`${basePath}/img/photos/${(Number(currentPhotoId) + 1)}.jpg`} //! сделать через find
-            alt=''
-            width={600}
-            height={600}
-          />
-        </div>
-        <ModalHeader bemClass='modal__header' />
-        <Comments actualAmount={5} totalAmount={9} />
+        {currentPhoto && isModalOpen &&
+          <div className='modal__image-box'>
+            <Image
+              className='modal__image'
+              src={currentPhoto.url}
+              alt=''
+              width={600}
+              height={600}
+            />
+            <ModalHeader bemClass='modal__header' />
+            <Comments />
+          </div>}
       </div>
     </dialog>
   );

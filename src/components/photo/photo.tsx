@@ -2,7 +2,7 @@
 
 import { basePath } from '@/constants/const';
 import { useAppDispatch } from '@/hooks';
-import { openModalAction, setCurrentPhotoIdAction } from '@/store/actions';
+import { openModalAction } from '@/store/actions';
 import { CommentType } from '@/types';
 import Image from 'next/image';
 import './photo.scss';
@@ -23,8 +23,7 @@ function Photo(photoProps: PhotoProps): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const handlePhotoClick = () => {
-    dispatch(openModalAction());
-    dispatch(setCurrentPhotoIdAction(String(id)));
+    dispatch(openModalAction(id));
   };
 
   return (

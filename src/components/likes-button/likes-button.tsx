@@ -1,4 +1,6 @@
 import { basePath } from '@/constants/const';
+import { useAppSelector } from '@/hooks';
+import { getCurrentPhoto } from '@/store/selectors';
 import Icon from '../icon/icon';
 import './likes-button.scss';
 
@@ -10,6 +12,8 @@ type LikesButtonProps = {
 
 function LikesButton(likesButtonProps: LikesButtonProps): React.JSX.Element {
   const { bemClass } = likesButtonProps;
+  const currentPhoto = useAppSelector(getCurrentPhoto);
+
   return (
     <button type='button' className={`${bemClass} likes-button`}>
       <Icon
@@ -19,7 +23,7 @@ function LikesButton(likesButtonProps: LikesButtonProps): React.JSX.Element {
         height={18}
       />
       <p className='likes-button__count'>
-        11
+        {currentPhoto?.likes}
       </p>
     </button>
   );

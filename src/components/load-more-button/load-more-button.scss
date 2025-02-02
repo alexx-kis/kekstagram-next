@@ -1,0 +1,9 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== load-more-button ========================^ // ^*/
+
+.load-more-button {
+  color: $blue;
+  font-size: const(14px);
+  margin-left: const(50px);
+}

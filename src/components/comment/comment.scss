@@ -8,7 +8,7 @@
 
   &__user-avatar {
     width: const(35px);
-    height: auto;
+    height: const(35px);
     flex-shrink: 0;
   }
 }

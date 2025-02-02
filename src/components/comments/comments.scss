@@ -18,5 +18,10 @@
 
   &__amount-total {}
 
-  &__list {}
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: const(20px);
+    margin-bottom: const(20px);
+  }
 }
