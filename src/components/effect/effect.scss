@@ -58,6 +58,9 @@
     border: solid const(5px) transparent;
     border-radius: const(5px);
     transition: all 250ms;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   &__input {
