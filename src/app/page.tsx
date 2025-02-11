@@ -1,10 +1,11 @@
 'use client';
 
 import ErrorScreen from '@/components/error-screen/error-screen';
-import Modal from '@/components/preview/preview';
 import PhotosGrid from '@/components/photos-grid/photos-grid';
 import Preloader from '@/components/preloader/preloader';
+import Modal from '@/components/preview/preview';
 import Sorting from '@/components/sorting/sorting';
+import SuccessBanner from '@/components/upload-status-banner/upload-status-banner';
 import UploadModal from '@/components/upload-modal/upload-modal';
 import { DataStatus } from '@/constants/const';
 import { useAppSelector } from '@/hooks';
@@ -26,6 +27,7 @@ export default function Home() {
       <PhotosGrid />
       <Modal />
       <UploadModal />
+      <SuccessBanner />
     </div>
   );
 }

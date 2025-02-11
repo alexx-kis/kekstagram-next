@@ -1,12 +1,13 @@
-import { FilterEffect, ModalType } from '@/constants/const';
+import { FilterEffect, ModalType, PostingStatus } from '@/constants/const';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { closeModalAction, removeUploadingImageSrc } from '@/store/actions';
-import { getOpenModal, getUploadingImageSrc } from '@/store/selectors';
+import { postUploadData } from '@/store/api-actions';
+import { getOpenModal, getPostingStatus, getUploadingImageSrc } from '@/store/selectors';
 import { isEscKey } from '@/utils/common-utils';
 import { uploadFormSchema } from '@/utils/validation';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CloseModalButton from '../close-modal-button/close-modal-button';
 import Effect from '../effect/effect';
 import Scale from '../scale/scale';
@@ -14,34 +15,42 @@ import './upload-modal.scss';
 
 // ^======================== UploadModal ========================^ //
 type FormState = {
+  effect: string;
   hashtags: string;
   comment: string;
 };
 
 const initialFormState = {
-  hashtags: [],
+  effect: 'default',
+  hashtags: '',
   comment: ''
 };
 
 function UploadModal(): React.JSX.Element {
-
   const openModal = useAppSelector(getOpenModal);
   const uploadingImageSrc = useAppSelector(getUploadingImageSrc);
+  const postingStatus = useAppSelector(getPostingStatus);
 
   const dispatch = useAppDispatch();
 
+  const [formState, setFormState] = useState(initialFormState);
+  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+
   const handleCloseButtonClick = () => {
     dispatch(closeModalAction());
-    dispatch(removeUploadingImageSrc())
+    dispatch(removeUploadingImageSrc());
   };
 
   const onEscKeydown = (e: KeyboardEvent) => {
     if (isEscKey(e)) {
       dispatch(closeModalAction());
-      dispatch(removeUploadingImageSrc())
+      dispatch(removeUploadingImageSrc());
     }
   };
 
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  // @------------------------ effects ------------------------@ //
   useEffect(() => {
     document.addEventListener('keydown', onEscKeydown);
 
@@ -57,17 +66,9 @@ function UploadModal(): React.JSX.Element {
     }
   }, [openModal]);
 
-  const [formState, setFormState] = useState(initialFormState);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
-
-  const isValidField = (name: string): name is keyof FormState => {
-    return ['hashtags', 'comment'].includes(name);
-  };
-
+  // @------------------------ handlers ------------------------@ //
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-
-    if (!isValidField(name)) return;
 
     setFormState((prevState) => ({
       ...prevState,
@@ -77,6 +78,16 @@ function UploadModal(): React.JSX.Element {
     validateField(name as keyof FormState, value);
   };
 
+  const handleEffectChange = (effect: string) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      effect,
+    }));
+
+    validateField('effect', effect);
+  };
+
+  // @------------------------ validation ------------------------@ //
   const validateField = (name: keyof FormState, value: string) => {
     const result = uploadFormSchema.safeParse({
       ...formState,
@@ -97,7 +108,7 @@ function UploadModal(): React.JSX.Element {
     }
   };
 
-
+  // @------------------------ submit ------------------------@ //
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const result = uploadFormSchema.safeParse(formState);
@@ -112,10 +123,10 @@ function UploadModal(): React.JSX.Element {
       return;
     }
 
-    console.log('form submitted', result.data);
+    dispatch(postUploadData(formState));
   };
 
-
+  // @------------------------ element ------------------------@ //
   return (
     <dialog
       className={clsx(
@@ -127,6 +138,7 @@ function UploadModal(): React.JSX.Element {
       <form
         className='upload-modal__form'
         onSubmit={handleFormSubmit}
+        ref={formRef}
       >
         <div className='upload-modal__image-box'>
           {
@@ -144,7 +156,12 @@ function UploadModal(): React.JSX.Element {
         <div className='upload-modal__effects'>
           <ul className='upload-modal__effects-list'>
             {Object.values(FilterEffect).map((item) => (
-              <Effect key={item} name={item} />
+              <Effect
+                key={item}
+                name={item}
+                effect={formState.effect}
+                onEffectChange={handleEffectChange}
+              />
             ))}
           </ul>
         </div>
@@ -175,8 +192,16 @@ function UploadModal(): React.JSX.Element {
             {errors.comment && <p className="upload-modal__field-error">{errors.comment}</p>}
           </div>
         </div>
-        <button type='submit' className='upload-modal__button'>
-          Post
+        <button
+          type='submit'
+          className='upload-modal__button'
+          disabled={postingStatus === PostingStatus.Posting}
+        >
+          {
+            postingStatus === PostingStatus.Posting
+              ? 'Posting...'
+              : 'Post'
+          }
         </button>
       </form>
     </dialog>

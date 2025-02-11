@@ -1,14 +1,17 @@
-import { basePath, FILE_TYPES, ModalType } from '@/constants/const';
+import { basePath, FILE_TYPES, ModalType, PostingStatus } from '@/constants/const';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { openModalAction, setUploadingImageSrc } from '@/store/actions';
-import { getUploadingImageSrc } from '@/store/selectors';
-import { useRef } from 'react';
+import { getOpenModal, getPostingStatus, getUploadingImageSrc } from '@/store/selectors';
+import { useEffect, useRef } from 'react';
 import './upload-form.scss';
 
 // ^======================== UploadForm ========================^ //
 
 function UploadForm(): React.JSX.Element {
   const uploadingImageSrc = useAppSelector(getUploadingImageSrc);
+  const postingStatus = useAppSelector(getPostingStatus);
+  const openModal = useAppSelector(getOpenModal);
+
   const dispatch = useAppDispatch();
 
   const uploadInputRef = useRef<HTMLInputElement | null>(null);
@@ -26,6 +29,13 @@ function UploadForm(): React.JSX.Element {
       }
     }
   };
+
+  useEffect(() => {
+    if (postingStatus === PostingStatus.Unknown && uploadInputRef.current && openModal === ModalType.Upload) {
+      uploadInputRef.current.value = '';
+    }
+  }, [postingStatus, openModal]);
+
 
   return (
     <form

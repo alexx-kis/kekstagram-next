@@ -19,3 +19,8 @@ export type PhotoType = {
 
 export type AppState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export type UploadDataType = {
+  hashtags: string;
+  comment: string;
+};

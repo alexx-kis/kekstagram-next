@@ -8,3 +8,4 @@ export const getSortingOption = (state: AppState) => state.sortingOption;
 export const getSortedPhotos = (state: AppState) => state.sortedPhotos;
 export const getDataStatus = (state: AppState) => state.dataStatus;
 export const getUploadingImageSrc = (state: AppState) => state.uploadingImageSrc;
+export const getPostingStatus = (state: AppState) => state.postingStatus;

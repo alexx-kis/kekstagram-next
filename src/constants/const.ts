@@ -38,6 +38,14 @@ export enum FilterEffect {
 export enum ModalType {
   Preview = 'preview',
   Upload = 'upload',
+  UploadStatusBanner = 'upload-status-banner'
+}
+
+export enum PostingStatus {
+  Unknown = 'unknown',
+  Posting = 'posting',
+  Posted = 'posted',
+  Error = 'error',
 }
 
 export const FILE_TYPES = ['jpg', 'jpeg', 'png'];

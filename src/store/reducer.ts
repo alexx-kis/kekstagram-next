@@ -1,9 +1,9 @@
-import { DataStatus, ModalType, SortingOption } from '@/constants/const';
+import { DataStatus, ModalType, PostingStatus, SortingOption } from '@/constants/const';
 import { PhotoType } from '@/types';
 import { getPhotoById, sortPhotos } from '@/utils/common-utils';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeSortingOptionAction, closeModalAction, openModalAction, removeCurrentPhoto, removeUploadingImageSrc, setCurrentPhoto, setUploadingImageSrc } from './actions';
-import { fetchPhotos } from './api-actions';
+import { changeSortingOptionAction, closeModalAction, openModalAction, removeCurrentPhoto, removeUploadingImageSrc, resetPostingStatus, setCurrentPhoto, setUploadingImageSrc } from './actions';
+import { fetchPhotos, postUploadData } from './api-actions';
 
 // %======================== reducer ========================% //
 type InitialState = {
@@ -14,6 +14,7 @@ type InitialState = {
   sortedPhotos: PhotoType[];
   dataStatus: DataStatus;
   uploadingImageSrc: string | null;
+  postingStatus: PostingStatus;
 };
 
 const initialState: InitialState = {
@@ -23,7 +24,8 @@ const initialState: InitialState = {
   sortingOption: SortingOption.Default,
   sortedPhotos: [],
   dataStatus: DataStatus.Loading,
-  uploadingImageSrc: ''
+  uploadingImageSrc: '',
+  postingStatus: PostingStatus.Unknown
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -61,4 +63,20 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(removeUploadingImageSrc, (state) => {
       state.uploadingImageSrc = null;
     })
+    .addCase(postUploadData.pending, (state) => {
+      state.postingStatus = PostingStatus.Posting;
+    })
+    .addCase(postUploadData.fulfilled, (state) => {
+      state.postingStatus = PostingStatus.Posted;
+      state.openModal = ModalType.UploadStatusBanner;
+      state.uploadingImageSrc = null;
+    })
+    .addCase(postUploadData.rejected, (state) => {
+      state.postingStatus = PostingStatus.Error;
+      state.openModal = ModalType.UploadStatusBanner;
+      state.uploadingImageSrc = null;
+    })
+    .addCase(resetPostingStatus, (state) => {
+      state.postingStatus = PostingStatus.Unknown;
+    });
 });

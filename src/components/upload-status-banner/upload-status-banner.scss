@@ -1,0 +1,53 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== success-banner ========================^ // ^*/
+
+.success-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: const(32px);
+  padding-inline: const(40px);
+  padding-block: const(100px);
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: const(200px);
+  border-radius: const(10px);
+  background-color: $brown;
+  visibility: hidden;
+  opacity: 0;
+  z-index: $overlayZIndex;
+  min-width: const(600px);
+
+  &._visible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__title {
+    color: $yellow;
+    font-size: const(32px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+
+  &__button {
+    padding-inline: const(10px);
+    padding-block: const(5px);
+    border: const(2px) solid #fff;
+    border-radius: const(5px);
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: opacity 250ms;
+    font-size: const(16px);
+
+    @media (hover:hover) {
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+}
