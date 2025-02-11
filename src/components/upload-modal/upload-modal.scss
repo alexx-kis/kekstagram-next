@@ -15,6 +15,10 @@
     margin-bottom: const(30px);
   }
 
+  &__image {
+    object-fit: contain;
+  }
+
   &__scale {
     position: absolute;
     left: 50%;

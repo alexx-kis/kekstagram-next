@@ -1,6 +1,7 @@
-import { basePath, FilterEffect, ModalType } from '@/constants/const';
+import { FilterEffect, ModalType } from '@/constants/const';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { closeModalAction } from '@/store/actions';
+import { getOpenModal, getUploadingImageSrc } from '@/store/selectors';
 import { isEscKey } from '@/utils/common-utils';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -9,13 +10,14 @@ import CloseModalButton from '../close-modal-button/close-modal-button';
 import Effect from '../effect/effect';
 import Scale from '../scale/scale';
 import './upload-modal.scss';
-import { getOpenModal } from '@/store/selectors';
 
 // ^======================== UploadModal ========================^ //
 
 function UploadModal(): React.JSX.Element {
 
-  const openModal = useAppSelector(getOpenModal)
+  const openModal = useAppSelector(getOpenModal);
+  const uploadingImageSrc = useAppSelector(getUploadingImageSrc);
+
   const dispatch = useAppDispatch();
 
   const handleCloseButtonClick = () => {
@@ -49,7 +51,7 @@ function UploadModal(): React.JSX.Element {
         <div className='upload-modal__image-box'>
           <Image
             className='upload-modal__image'
-            src={`${basePath}/img/upload-default-image.jpg`}
+            src={uploadingImageSrc!}
             alt=''
             width={600}
             height={600}

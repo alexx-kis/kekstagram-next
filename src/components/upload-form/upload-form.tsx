@@ -1,15 +1,27 @@
-import { basePath, ModalType } from '@/constants/const';
+import { basePath, FILE_TYPES, ModalType } from '@/constants/const';
 import { useAppDispatch } from '@/hooks';
-import { openModalAction } from '@/store/actions';
+import { openModalAction, setUploadingImageSrc } from '@/store/actions';
+import { useRef } from 'react';
 import './upload-form.scss';
 
 // ^======================== UploadForm ========================^ //
 
 function UploadForm(): React.JSX.Element {
   const dispatch = useAppDispatch();
+  const uploadInputRef = useRef<HTMLInputElement | null>(null);
 
   const onUploadInputChange = () => {
     dispatch(openModalAction(ModalType.Upload));
+    if (uploadInputRef.current) {
+      const file = uploadInputRef.current.files?.[0];
+      const fileName = file?.name.toLowerCase();
+      const isAcceptableType = FILE_TYPES.some((type) => fileName?.endsWith(type));
+      
+      if (isAcceptableType && file) {
+        const src = URL.createObjectURL(file);
+        dispatch(setUploadingImageSrc(src))
+      }
+    }
   };
 
   return (
@@ -41,6 +53,7 @@ function UploadForm(): React.JSX.Element {
               type='file'
               className='upload-form__input'
               onChange={onUploadInputChange}
+              ref={uploadInputRef}
             />
             Upload
           </label>

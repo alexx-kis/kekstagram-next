@@ -39,3 +39,5 @@ export enum ModalType {
   Preview = 'preview',
   Upload = 'upload',
 }
+
+export const FILE_TYPES = ['jpg', 'jpeg', 'png'];

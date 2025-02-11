@@ -2,7 +2,7 @@ import { DataStatus, ModalType, SortingOption } from '@/constants/const';
 import { PhotoType } from '@/types';
 import { getPhotoById, sortPhotos } from '@/utils/common-utils';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeSortingOptionAction, closeModalAction, openModalAction, removeCurrentPhoto, setCurrentPhoto } from './actions';
+import { changeSortingOptionAction, closeModalAction, openModalAction, removeCurrentPhoto, setCurrentPhoto, setUploadingImageSrc } from './actions';
 import { fetchPhotos } from './api-actions';
 
 // %======================== reducer ========================% //
@@ -13,6 +13,7 @@ type InitialState = {
   sortingOption: SortingOption,
   sortedPhotos: PhotoType[];
   dataStatus: DataStatus;
+  uploadingImageSrc: string | null;
 };
 
 const initialState: InitialState = {
@@ -21,7 +22,8 @@ const initialState: InitialState = {
   currentPhoto: undefined,
   sortingOption: SortingOption.Default,
   sortedPhotos: [],
-  dataStatus: DataStatus.Loading
+  dataStatus: DataStatus.Loading,
+  uploadingImageSrc: ''
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -52,5 +54,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchPhotos.rejected, (state) => {
       state.dataStatus = DataStatus.Error;
+    })
+    .addCase(setUploadingImageSrc, (state, action) => {
+      state.uploadingImageSrc = action.payload;
     });
 });
