@@ -19,6 +19,8 @@ export enum APIRoute {
   PostData = '/'
 }
 
+export const ERROR_BANNER_TIMEOUT = 5000;
+
 export enum DataStatus {
   Unknown = 'Unknown',
   Loading = 'Loading',

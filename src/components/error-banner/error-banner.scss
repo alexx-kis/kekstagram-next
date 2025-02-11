@@ -1,0 +1,25 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== error-banner ========================^ // ^*/
+
+.error-banner {
+  padding-inline: const(3px);
+  padding-block: const(10px);
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  visibility: hidden;
+  opacity: 0;
+  background-color: $red;
+  color: #fff;
+  font-size: const(32px);
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 250ms;
+
+  &._visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}

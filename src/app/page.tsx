@@ -1,12 +1,12 @@
 'use client';
 
-import ErrorScreen from '@/components/error-screen/error-screen';
+import ErrorBanner from '@/components/error-banner/error-banner';
 import PhotosGrid from '@/components/photos-grid/photos-grid';
 import Preloader from '@/components/preloader/preloader';
 import Modal from '@/components/preview/preview';
 import Sorting from '@/components/sorting/sorting';
-import SuccessBanner from '@/components/upload-status-banner/upload-status-banner';
 import UploadModal from '@/components/upload-modal/upload-modal';
+import SuccessBanner from '@/components/upload-status-banner/upload-status-banner';
 import { DataStatus } from '@/constants/const';
 import { useAppSelector } from '@/hooks';
 import { getDataStatus } from '@/store/selectors';
@@ -18,9 +18,6 @@ export default function Home() {
   if (dataStatus === DataStatus.Loading) {
     return <Preloader />;
   }
-  if (dataStatus === DataStatus.Error) {
-    return <ErrorScreen />;
-  }
   return (
     <div className='container'>
       <Sorting />
@@ -28,6 +25,7 @@ export default function Home() {
       <Modal />
       <UploadModal />
       <SuccessBanner />
+      <ErrorBanner />
     </div>
   );
 }
