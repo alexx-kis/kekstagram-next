@@ -1,0 +1,76 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== effect ========================^ // ^*/
+
+.effect {
+  &:has(input:checked) {
+    .effect__name {
+      color: $yellow;
+    }
+
+    .effect__thumbnail {
+      border-color: $yellow;
+    }
+  }
+
+  &._chrome {
+    .effect__thumbnail {
+      filter: grayscale(1);
+    }
+  }
+
+  &._sepia {
+    .effect__thumbnail {
+      filter: sepia(1);
+    }
+  }
+
+  &._marvin {
+    .effect__thumbnail {
+      filter: invert(100%);
+    }
+  }
+
+  &._phobos {
+    .effect__thumbnail {
+      filter: blur(const(3px));
+    }
+  }
+
+  &._heat {
+    .effect__thumbnail {
+      filter: brightness(3);
+    }
+  }
+
+  &__label {
+    transition: all 250ms;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: const(5px)
+  }
+
+  &__thumbnail {
+    @include square(const(70px));
+    background-color: $blueGray;
+    border: solid const(5px) transparent;
+    border-radius: const(5px);
+    transition: all 250ms;
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  &__name {
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all 250ms;
+    color: #fff;
+    font-size: const(14px);
+    letter-spacing: -0.04em;
+  }
+}

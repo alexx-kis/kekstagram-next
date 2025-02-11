@@ -56,13 +56,13 @@ function UploadModal(): React.JSX.Element {
             height={600}
           />
           <Scale bemClass='upload-modal__scale' />
-          <div className='effects'>
-            <ul className='effects__list'>
-              {Object.values(FilterEffect).map((item) => (
-                <Effect key={item} name={item} />
-              ))}
-            </ul>
-          </div>
+        </div>
+        <div className='upload-modal__effects'>
+          <ul className='upload-modal__effects-list'>
+            {Object.values(FilterEffect).map((item) => (
+              <Effect key={item} name={item} />
+            ))}
+          </ul>
         </div>
       </div>
     </dialog>
