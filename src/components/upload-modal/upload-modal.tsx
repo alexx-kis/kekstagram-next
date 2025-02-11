@@ -49,13 +49,16 @@ function UploadModal(): React.JSX.Element {
       <CloseModalButton onCloseModalButtonClick={handleCloseButtonClick} />
       <form className='upload-modal__form'>
         <div className='upload-modal__image-box'>
-          <Image
-            className='upload-modal__image'
-            src={uploadingImageSrc!}
-            alt=''
-            width={600}
-            height={600}
-          />
+          {
+            uploadingImageSrc &&
+            <Image
+              className='upload-modal__image'
+              src={uploadingImageSrc}
+              alt=''
+              width={600}
+              height={600}
+            />
+          }
           <Scale bemClass='upload-modal__scale' />
         </div>
         <div className='upload-modal__effects'>
