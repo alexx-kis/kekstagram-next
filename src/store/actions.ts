@@ -12,3 +12,4 @@ export const setCurrentPhoto = createAction<number>('preview/setCurrentPhoto');
 export const removeCurrentPhoto = createAction('preview/removeCurrentPhoto');
 
 export const setUploadingImageSrc = createAction<string>('upload/setUploadingPhotoSrc');
+export const removeUploadingImageSrc = createAction('upload/removeUploadingPhotoSrc');

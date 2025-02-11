@@ -1,17 +1,27 @@
 import { FilterEffect, ModalType } from '@/constants/const';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { closeModalAction } from '@/store/actions';
+import { closeModalAction, removeUploadingImageSrc } from '@/store/actions';
 import { getOpenModal, getUploadingImageSrc } from '@/store/selectors';
 import { isEscKey } from '@/utils/common-utils';
+import { uploadFormSchema } from '@/utils/validation';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CloseModalButton from '../close-modal-button/close-modal-button';
 import Effect from '../effect/effect';
 import Scale from '../scale/scale';
 import './upload-modal.scss';
 
 // ^======================== UploadModal ========================^ //
+type FormState = {
+  hashtags: string;
+  comment: string;
+};
+
+const initialFormState = {
+  hashtags: [],
+  comment: ''
+};
 
 function UploadModal(): React.JSX.Element {
 
@@ -22,11 +32,13 @@ function UploadModal(): React.JSX.Element {
 
   const handleCloseButtonClick = () => {
     dispatch(closeModalAction());
+    dispatch(removeUploadingImageSrc())
   };
 
   const onEscKeydown = (e: KeyboardEvent) => {
     if (isEscKey(e)) {
       dispatch(closeModalAction());
+      dispatch(removeUploadingImageSrc())
     }
   };
 
@@ -38,6 +50,71 @@ function UploadModal(): React.JSX.Element {
     };
   });
 
+  useEffect(() => {
+    if (openModal !== ModalType.Upload) {
+      setFormState(initialFormState);
+      setErrors({});
+    }
+  }, [openModal]);
+
+  const [formState, setFormState] = useState(initialFormState);
+  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+
+  const isValidField = (name: string): name is keyof FormState => {
+    return ['hashtags', 'comment'].includes(name);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+
+    if (!isValidField(name)) return;
+
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    validateField(name as keyof FormState, value);
+  };
+
+  const validateField = (name: keyof FormState, value: string) => {
+    const result = uploadFormSchema.safeParse({
+      ...formState,
+      [name]: value,
+    });
+
+    if (result.success) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }));
+    } else {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      setErrors((prev) => ({
+        ...prev,
+        [name]: fieldErrors[name]?.[0] ?? '',
+      }));
+    }
+  };
+
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = uploadFormSchema.safeParse(formState);
+
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      setErrors(
+        Object.fromEntries(
+          Object.entries(fieldErrors).map(([key, val]) => [key, val?.[0] ?? ''])
+        ) as Partial<Record<keyof FormState, string>>
+      );
+      return;
+    }
+
+    console.log('form submitted', result.data);
+  };
+
 
   return (
     <dialog
@@ -47,7 +124,10 @@ function UploadModal(): React.JSX.Element {
       )}
     >
       <CloseModalButton onCloseModalButtonClick={handleCloseButtonClick} />
-      <form className='upload-modal__form'>
+      <form
+        className='upload-modal__form'
+        onSubmit={handleFormSubmit}
+      >
         <div className='upload-modal__image-box'>
           {
             uploadingImageSrc &&
@@ -69,11 +149,30 @@ function UploadModal(): React.JSX.Element {
           </ul>
         </div>
         <div className='upload-modal__fieldset'>
-          <div className='upload-modal__field'>
-            <input type='text' className='upload-modal__input' placeholder='#hashtag' />
+          <div className='upload-modal__field-wrapper'>
+            <div className='upload-modal__field'>
+              <input
+                type='text'
+                name='hashtags'
+                className='upload-modal__input'
+                placeholder='#hashtag'
+                value={formState.hashtags}
+                onChange={handleInputChange}
+              />
+            </div>
+            {errors.hashtags && <p className="upload-modal__field-error">{errors.hashtags}</p>}
           </div>
-          <div className='upload-modal__field'>
-            <textarea className='upload-modal__input' placeholder='Your comment' />
+          <div className='upload-modal__field-wrapper'>
+            <div className='upload-modal__field'>
+              <textarea
+                className='upload-modal__input'
+                name='comment'
+                placeholder='Your comment'
+                value={formState.comment}
+                onChange={handleInputChange}
+              />
+            </div>
+            {errors.comment && <p className="upload-modal__field-error">{errors.comment}</p>}
           </div>
         </div>
         <button type='submit' className='upload-modal__button'>

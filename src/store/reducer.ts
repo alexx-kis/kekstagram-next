@@ -2,7 +2,7 @@ import { DataStatus, ModalType, SortingOption } from '@/constants/const';
 import { PhotoType } from '@/types';
 import { getPhotoById, sortPhotos } from '@/utils/common-utils';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeSortingOptionAction, closeModalAction, openModalAction, removeCurrentPhoto, setCurrentPhoto, setUploadingImageSrc } from './actions';
+import { changeSortingOptionAction, closeModalAction, openModalAction, removeCurrentPhoto, removeUploadingImageSrc, setCurrentPhoto, setUploadingImageSrc } from './actions';
 import { fetchPhotos } from './api-actions';
 
 // %======================== reducer ========================% //
@@ -57,5 +57,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUploadingImageSrc, (state, action) => {
       state.uploadingImageSrc = action.payload;
-    });
+    })
+    .addCase(removeUploadingImageSrc, (state) => {
+      state.uploadingImageSrc = null;
+    })
 });

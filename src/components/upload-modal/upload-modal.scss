@@ -39,9 +39,13 @@
   &__fieldset {
     display: flex;
     flex-direction: column;
-    gap: const(20px);
+    gap: const(26px);
     margin-bottom: const(30px);
     width: 100%;
+  }
+
+  &__field-wrapper {
+    position: relative;
   }
 
   &__field {
@@ -67,6 +71,17 @@
       @include square(100%);
       font-size: const(14px);
     }
+  }
+
+  &__field-error {
+    background-color: $red;
+    color: #fff;
+    text-align: center;
+    font-size: const(12px);
+    text-transform: uppercase;
+    position: absolute;
+    width: 100%;
+    top: calc(100% + const(2px));
   }
 
   &__button {
