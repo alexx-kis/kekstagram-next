@@ -1,15 +1,14 @@
-import { DataStatus, SortingOption } from '@/constants/const';
+import { DataStatus, ModalType, SortingOption } from '@/constants/const';
 import { PhotoType } from '@/types';
 import { getPhotoById, sortPhotos } from '@/utils/common-utils';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeSortingOptionAction, closeModalAction, openModalAction } from './actions';
+import { changeSortingOptionAction, closeModalAction, openModalAction, removeCurrentPhoto, setCurrentPhoto } from './actions';
 import { fetchPhotos } from './api-actions';
 
 // %======================== reducer ========================% //
 type InitialState = {
   data: PhotoType[],
-  isModalOpen: boolean,
-  isUploadModalOpen: boolean,
+  openModal: ModalType | null,
   currentPhoto: PhotoType | undefined,
   sortingOption: SortingOption,
   sortedPhotos: PhotoType[];
@@ -18,8 +17,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   data: [],
-  isModalOpen: false,
-  isUploadModalOpen: false,
+  openModal: null,
   currentPhoto: undefined,
   sortingOption: SortingOption.Default,
   sortedPhotos: [],
@@ -29,11 +27,16 @@ const initialState: InitialState = {
 export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(openModalAction, (state, action) => {
-      state.isModalOpen = true;
-      state.currentPhoto = getPhotoById(state.data, action.payload);
+      state.openModal = action.payload;
     })
     .addCase(closeModalAction, (state) => {
-      state.isModalOpen = false;
+      state.openModal = null;
+    })
+    .addCase(setCurrentPhoto, (state, action) => {
+      state.currentPhoto = getPhotoById(state.data, action.payload);
+    })
+    .addCase(removeCurrentPhoto, (state) => {
+      state.currentPhoto = undefined;
     })
     .addCase(changeSortingOptionAction, (state, action) => {
       state.sortingOption = action.payload;

@@ -43,11 +43,6 @@ body {
   }
 }
 
-.page-transition {
-  opacity: 0;
-  filter: blur(12px);
-}
-
 .hidden {
   display: none;
 }
@@ -70,5 +65,33 @@ main {
 
   @media (max-width: $MOBILE) {
     padding-bottom: mob(20px, 16px);
+  }
+}
+
+.modal {
+  display: block;
+  max-width: calc(100% - 25px);
+  max-height: calc(100% - 25px);
+  margin: auto;
+  padding-inline: const(50px);
+  position: fixed;
+  inset-block-start: 0;
+  inset-block-end: 0;
+  z-index: $modalZIndex;
+  visibility: hidden;
+  opacity: 0;
+  overflow: auto;
+  background-color: transparent;
+  transition: all 250ms;
+  user-select: text;
+
+  &._open {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  @media (max-width: $MOBILE) {
+    padding-inline: 0;
+    padding-top: 50px;
   }
 }

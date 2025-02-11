@@ -1,0 +1,18 @@
+@use '@/styles/abstracts' as *;
+
+/*^ // ^======================== preview ========================^ // ^*/
+
+.preview {
+
+  &__close-button {}
+
+  &__inner {
+    max-width: const(600px);
+    background-color: #fff;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+  }
+}

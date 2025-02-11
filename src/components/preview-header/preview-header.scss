@@ -1,8 +1,8 @@
 @use '@/styles/abstracts' as *;
 
-/*^ // ^ ======================== modal-header ========================^ // ^ */
+/*^ // ^ ======================== preview-header ========================^ // ^ */
 
-.modal-header {
+.preview-header {
   padding: const(15px);
   display: flex;
   align-items: center;

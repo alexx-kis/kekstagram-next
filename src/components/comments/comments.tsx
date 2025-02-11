@@ -1,6 +1,6 @@
-import { basePath, SHOWN_COMMENTS_STEP } from '@/constants/const';
+import { basePath, ModalType, SHOWN_COMMENTS_STEP } from '@/constants/const';
 import { useAppSelector } from '@/hooks';
-import { getCurrentPhoto, getIsModalOpen } from '@/store/selectors';
+import { getCurrentPhoto, getOpenModal } from '@/store/selectors';
 import { useEffect, useState } from 'react';
 import Comment from '../comment/comment';
 import LoadMoreButton from '../load-more-button/load-more-button';
@@ -9,7 +9,7 @@ import './comments.scss';
 // ^======================== Comments ========================^ //
 
 function Comments(): React.JSX.Element {
-  const isModalOpen = useAppSelector(getIsModalOpen);
+  const openModal = useAppSelector(getOpenModal);
   const currentPhoto = useAppSelector(getCurrentPhoto);
   const comments = currentPhoto?.comments;
   const totalCommentsAmount = comments?.length;
@@ -27,10 +27,10 @@ function Comments(): React.JSX.Element {
   };
 
   useEffect(() => {
-    if (!isModalOpen) {
+    if (openModal !== ModalType.Preview) {
       setShownCommentsAmount(initialShownCommentsAmount);
     }
-  }, [isModalOpen, initialShownCommentsAmount]);
+  }, [openModal, initialShownCommentsAmount]);
 
   return (
     <div className='comments'>

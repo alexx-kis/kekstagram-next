@@ -1,9 +1,9 @@
 'use client';
 
-import { basePath } from '@/constants/const';
+import { basePath, ModalType } from '@/constants/const';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { closeModalAction } from '@/store/actions';
-import { getCurrentPhoto, getIsModalOpen } from '@/store/selectors';
+import { closeModalAction, removeCurrentPhoto } from '@/store/actions';
+import { getCurrentPhoto, getOpenModal } from '@/store/selectors';
 import { isEscKey } from '@/utils/common-utils';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -11,24 +11,28 @@ import { useEffect } from 'react';
 import CloseModalButton from '../close-modal-button/close-modal-button';
 import CommentForm from '../comment-form/comment-form';
 import Comments from '../comments/comments';
-import ModalHeader from '../modal-header/modal-header';
-import './modal.scss';
+import PreviewHeader from '../preview-header/preview-header';
+import './preview.scss';
 
-// ^======================== Modal ========================^ //
+// ^======================== Preview ========================^ //
 
-function Modal(): React.JSX.Element {
+function Preview(): React.JSX.Element {
 
   const dispatch = useAppDispatch();
-  const isModalOpen = useAppSelector(getIsModalOpen);
+  const openModal = useAppSelector(getOpenModal);
   const currentPhoto = useAppSelector(getCurrentPhoto);
+
+  const isPreviewOpen = openModal === ModalType.Preview;
 
   const handleCloseButtonClick = () => {
     dispatch(closeModalAction());
+    dispatch(removeCurrentPhoto());
   };
 
   const onEscKeydown = (e: KeyboardEvent) => {
     if (isEscKey(e)) {
       dispatch(closeModalAction());
+      dispatch(removeCurrentPhoto());
     }
   };
 
@@ -44,29 +48,29 @@ function Modal(): React.JSX.Element {
   return (
     <dialog
       className={clsx(
-        'modal',
-        { '_open': isModalOpen }
+        'modal preview',
+        { '_open': isPreviewOpen }
       )}
     >
       <CloseModalButton onCloseModalButtonClick={handleCloseButtonClick} />
-      <div className='modal__inner'>
-        {currentPhoto && isModalOpen &&
-          <> <div className='modal__image-box'>
+      <div className='preview__inner'>
+        {currentPhoto && isPreviewOpen &&
+          <> <div className='preview__image-box'>
             <Image
-              className='modal__image'
+              className='preview__image'
               src={`${basePath}/img/${currentPhoto.url}`}
               alt=''
               width={600}
               height={600}
             />
           </div>
-            <ModalHeader bemClass='modal__header' />
+            <PreviewHeader bemClass='preview__header' />
             <Comments />
           </>
         }
-        <CommentForm bemClass='comments__form' />
+        <CommentForm bemClass='preview__form' />
       </div>
     </dialog>
   );
 }
-export default Modal;
+export default Preview;

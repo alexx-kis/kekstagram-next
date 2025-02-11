@@ -1,9 +1,17 @@
-import { basePath } from '@/constants/const';
+import { basePath, ModalType } from '@/constants/const';
+import { useAppDispatch } from '@/hooks';
+import { openModalAction } from '@/store/actions';
 import './upload-form.scss';
 
 // ^======================== UploadForm ========================^ //
 
 function UploadForm(): React.JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const onUploadInputChange = () => {
+    dispatch(openModalAction(ModalType.Upload));
+  };
+
   return (
     <form
       className='upload-form'
@@ -29,7 +37,11 @@ function UploadForm(): React.JSX.Element {
               backgroundImage: `url(${basePath}/img/icons/upload-button.svg)`
             }}
           >
-            <input type='file' className='upload-form__input' />
+            <input
+              type='file'
+              className='upload-form__input'
+              onChange={onUploadInputChange}
+            />
             Upload
           </label>
         </div>

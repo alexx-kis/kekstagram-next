@@ -34,3 +34,8 @@ export enum FilterEffect {
   Phobos = 'phobos',
   Heat = 'heat'
 }
+
+export enum ModalType {
+  Preview = 'preview',
+  Upload = 'upload',
+}

@@ -1,7 +1,7 @@
 'use client';
 
 import ErrorScreen from '@/components/error-screen/error-screen';
-import Modal from '@/components/modal/modal';
+import Modal from '@/components/preview/preview';
 import PhotosGrid from '@/components/photos-grid/photos-grid';
 import Preloader from '@/components/preloader/preloader';
 import Sorting from '@/components/sorting/sorting';

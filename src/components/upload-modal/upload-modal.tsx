@@ -1,7 +1,6 @@
-import { basePath, FilterEffect } from '@/constants/const';
+import { basePath, FilterEffect, ModalType } from '@/constants/const';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { closeModalAction } from '@/store/actions';
-import { getIsUploadModalOpen } from '@/store/selectors';
 import { isEscKey } from '@/utils/common-utils';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -10,12 +9,13 @@ import CloseModalButton from '../close-modal-button/close-modal-button';
 import Effect from '../effect/effect';
 import Scale from '../scale/scale';
 import './upload-modal.scss';
+import { getOpenModal } from '@/store/selectors';
 
 // ^======================== UploadModal ========================^ //
 
 function UploadModal(): React.JSX.Element {
 
-  const isUploadModalOpen = useAppSelector(getIsUploadModalOpen);
+  const openModal = useAppSelector(getOpenModal)
   const dispatch = useAppDispatch();
 
   const handleCloseButtonClick = () => {
@@ -41,12 +41,11 @@ function UploadModal(): React.JSX.Element {
     <dialog
       className={clsx(
         'modal upload-modal',
-        { '_open': isUploadModalOpen },
-        '_open'
+        { '_open': openModal === ModalType.Upload }
       )}
     >
       <CloseModalButton onCloseModalButtonClick={handleCloseButtonClick} />
-      <div className='upload-modal__inner'>
+      <form className='upload-modal__form'>
         <div className='upload-modal__image-box'>
           <Image
             className='upload-modal__image'
@@ -64,7 +63,18 @@ function UploadModal(): React.JSX.Element {
             ))}
           </ul>
         </div>
-      </div>
+        <div className='upload-modal__fieldset'>
+          <div className='upload-modal__field'>
+            <input type='text' className='upload-modal__input' placeholder='#hashtag' />
+          </div>
+          <div className='upload-modal__field'>
+            <textarea className='upload-modal__input' placeholder='Your comment' />
+          </div>
+        </div>
+        <button type='submit' className='upload-modal__button'>
+          Post
+        </button>
+      </form>
     </dialog>
   );
 }

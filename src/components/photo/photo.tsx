@@ -1,8 +1,8 @@
 'use client';
 
-import { basePath } from '@/constants/const';
+import { basePath, ModalType } from '@/constants/const';
 import { useAppDispatch } from '@/hooks';
-import { openModalAction } from '@/store/actions';
+import { openModalAction, setCurrentPhoto } from '@/store/actions';
 import { CommentType } from '@/types';
 import Image from 'next/image';
 import './photo.scss';
@@ -23,7 +23,8 @@ function Photo(photoProps: PhotoProps): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const handlePhotoClick = () => {
-    dispatch(openModalAction(id));
+    dispatch(openModalAction(ModalType.Preview));
+    dispatch(setCurrentPhoto(id))
   };
 
   return (
