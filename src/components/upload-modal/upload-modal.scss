@@ -15,6 +15,7 @@
     margin-bottom: const(30px);
     aspect-ratio: 1;
     @include square(const(600px));
+    overflow: clip;
 
     @media (max-width: $TABLET) {
       @include square(tab(600px, 300px));

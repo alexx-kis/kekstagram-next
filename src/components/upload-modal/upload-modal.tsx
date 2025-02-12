@@ -16,12 +16,14 @@ import './upload-modal.scss';
 // ^======================== UploadModal ========================^ //
 type FormState = {
   effect: string;
+  size: number;
   hashtags: string;
   comment: string;
 };
 
 const initialFormState = {
   effect: 'default',
+  size: 1,
   hashtags: '',
   comment: ''
 };
@@ -35,6 +37,7 @@ function UploadModal(): React.JSX.Element {
 
   const [formState, setFormState] = useState(initialFormState);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const [filter, setFilter] = useState('');
 
   const handleCloseButtonClick = () => {
     dispatch(closeModalAction());
@@ -66,6 +69,33 @@ function UploadModal(): React.JSX.Element {
     }
   }, [openModal]);
 
+  useEffect(() => {
+    switch (formState.effect) {
+      case (FilterEffect.Default):
+        setFilter('');
+        break;
+      case (FilterEffect.Chrome):
+        setFilter('grayscale(1)');
+        break;
+      case (FilterEffect.Sepia):
+        setFilter('sepia(1)');
+        break;
+      case (FilterEffect.Marvin):
+        setFilter('invert(1)');
+        break;
+      case (FilterEffect.Phobos):
+        setFilter('blur(max(0.2vw, 3px))');
+        break;
+      case (FilterEffect.Heat):
+        setFilter('brightness(3)');
+        break;
+
+      default:
+        break;
+    }
+
+  }, [formState]);
+
   // @------------------------ handlers ------------------------@ //
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -85,6 +115,19 @@ function UploadModal(): React.JSX.Element {
     }));
 
     validateField('effect', effect);
+  };
+
+  const handleDecreaseButtonClick = () => {
+    setFormState((prevState) => ({
+      ...prevState,
+      size: prevState.size - 0.25,
+    }));
+  };
+  const handleIncreaseButtonClick = () => {
+    setFormState((prevState) => ({
+      ...prevState,
+      size: prevState.size + 0.25,
+    }));
   };
 
   // @------------------------ validation ------------------------@ //
@@ -149,9 +192,20 @@ function UploadModal(): React.JSX.Element {
               alt=''
               width={600}
               height={600}
+              style={{
+                scale: `${formState.size}`,
+                filter: `${filter}`
+              }}
             />
           }
-          <Scale bemClass='upload-modal__scale' />
+
+          <Scale
+            bemClass='upload-modal__scale'
+            onDecreaseButtonClick={handleDecreaseButtonClick}
+            onIncreaseButtonClick={handleIncreaseButtonClick}
+            imageSize={formState.size}
+          />
+
         </div>
         <div className='upload-modal__effects'>
           <ul className='upload-modal__effects-list'>

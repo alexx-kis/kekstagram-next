@@ -7,6 +7,7 @@ const hashtagRegex = /^#[a-zA-Zа-яА-Я0-9_]+$/;
 export const uploadFormSchema = z.object({
   image: z.any().nullable(),
   effect: z.string().nonempty('Please select an effect'),
+  size: z.number(),
   hashtags: z
     .string()
     .optional()

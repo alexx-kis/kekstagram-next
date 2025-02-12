@@ -2,14 +2,32 @@ import './scale.scss';
 
 // ^======================== Scale ========================^ //
 
-function Scale({ bemClass }: { bemClass: string; }): React.JSX.Element {
+type ScaleProps = {
+  bemClass: string;
+  onDecreaseButtonClick: () => void;
+  onIncreaseButtonClick: () => void;
+  imageSize: number;
+};
+
+function Scale(scaleProps: ScaleProps): React.JSX.Element {
+
+  const { bemClass, onDecreaseButtonClick, onIncreaseButtonClick, imageSize } = scaleProps;
+
   return (
     <div className={`${bemClass} scale`}>
-      <button type='button' className='scale__button _decrease'>
+      <button
+        type='button'
+        className='scale__button _decrease'
+        onClick={onDecreaseButtonClick}
+      >
         -
       </button>
-      <input type='text' className='scale__input' defaultValue={`${100}%`}/>
-      <button type='button' className='scale__button _increase'>
+      <input type='text' className='scale__input' value={`${imageSize * 100}%`} readOnly/>
+      <button
+        type='button'
+        className='scale__button _increase'
+        onClick={onIncreaseButtonClick}
+      >
         +
       </button>
     </div>
