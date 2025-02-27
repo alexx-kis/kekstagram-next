@@ -32,9 +32,11 @@ export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(openModalAction, (state, action) => {
       state.openModal = action.payload;
+      document.body.style.overflow = 'hidden';
     })
     .addCase(closeModalAction, (state) => {
       state.openModal = null;
+      document.body.style.overflow = '';
     })
     .addCase(setCurrentPhoto, (state, action) => {
       state.currentPhoto = getPhotoById(state.data, action.payload);

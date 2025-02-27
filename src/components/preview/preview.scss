@@ -4,6 +4,8 @@
 
 .preview {
 
+  @include hide-scrollbar;
+
   &__close-button {}
 
   &__inner {
